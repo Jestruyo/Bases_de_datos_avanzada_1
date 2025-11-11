@@ -1,0 +1,24 @@
+services:
+  oracle-xe:
+    image: gvenzl/oracle-xe:21-slim
+    container_name: oracle-xml-lab
+    platform: linux/amd64
+    ports:
+      - "1521:1521"
+      - "5500:5500"
+    environment:
+      ORACLE_PASSWORD: admin_password
+      APP_USER: hr_xml_lab
+      APP_USER_PASSWORD: hr_xml_lab_pwd
+    volumes:
+      - ./docker/oracle/init-sql:/container-entrypoint-initdb.d
+      - oracle-data:/opt/oracle/oradata
+    healthcheck:
+      test: ["CMD-SHELL", "echo 'select 1 from dual;' | sqlplus -S SYSTEM/$$ORACLE_PASSWORD@localhost:1521/XEPDB1"]
+      interval: 20s
+      timeout: 10s
+      retries: 10
+
+volumes:
+  oracle-data:
+
