@@ -132,10 +132,52 @@ docker volume rm bases_de_datos_avanzada_1_oracle-data
 
    La primera inserción debe completarse correctamente y la segunda provocará un error controlado por incumplir el esquema.
 
+## Taller: Índices y Restricciones en Oracle
+
+Este proyecto también incluye un taller completo sobre índices y restricciones en Oracle utilizando el esquema HR.
+
+### Ubicación de los Scripts
+
+Los scripts del taller se encuentran en `scripts/taller_indices/`:
+
+- `01_consultar_indices.sql`: Consulta índices en employees y departments
+- `02_desactivar_restricciones.sql`: Desactiva restricciones de ambas tablas
+- `03_insertar_tuplas_invalidas.sql`: Inserta tuplas que violan restricciones
+- `00_limpiar_datos_invalidos.sql`: Limpia datos inválidos antes de reactivar restricciones
+- `04_reactivar_restricciones.sql`: Reactiva las restricciones
+- `05_crear_departments2.sql`: Crea departments2 e inserta tuplas
+- `06_transacciones_y_rollback.sql`: Ejemplos de transacciones, COMMIT y ROLLBACK
+- `07_archivos_redo.sql`: Consultas sobre archivos Redo Log
+- `MASTER.sql`: Script maestro que ejecuta todos los pasos en secuencia
+
+### Documentación
+
+La documentación completa del taller está disponible en `docs/TALLER_INDICES_RESTRICCIONES.md` e incluye:
+
+- Explicaciones detalladas de cada paso
+- Código SQL ejecutado
+- Análisis de resultados
+- Respuestas a las preguntas del taller
+- Ejemplos prácticos de transacciones y archivos Redo
+
+### Ejecución del Taller
+
+```bash
+# Desde SQL*Plus como usuario HR
+sqlplus hr/hr@XEPDB1 @scripts/taller_indices/MASTER.sql
+
+# O ejecutar scripts individuales
+sqlplus hr/hr@XEPDB1 @scripts/taller_indices/01_consultar_indices.sql
+```
+
+Para más detalles, consulta `scripts/taller_indices/README.md`.
+
 ## Organización del repositorio
 
 - `docker-compose.yml`: Orquesta Oracle XE con inicialización automática.
 - `docker/oracle/init-sql/`: Scripts ejecutados al arrancar el contenedor (desbloqueo de HR, creación de usuario).
 - `scripts/`: Ejercicios del laboratorio (semilla de datos HR, registro de esquema, consulta SQL/XML, inserciones).
+  - `scripts/taller_indices/`: Scripts del taller de índices y restricciones.
 - `docs/xml/`: Esquema XML y ficheros generados.
 - `docs/screenshots/`: Carpeta sugerida para capturas usadas en la memoria.
+- `docs/TALLER_INDICES_RESTRICCIONES.md`: Documentación completa del taller de índices y restricciones.
